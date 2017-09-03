@@ -6,7 +6,7 @@ using DependencyInjection.Models;
 
 namespace DependencyInjection.Concrete
 {
-	public class StudentAdministration
+	public class StudentAdministration : IStudentAdministration
 	{
 		private readonly IStudentRepository _studentRepository;
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using DependencyInjection.Abstract;
 using DependencyInjection.Concrete;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DependencyInjection
 {
@@ -7,9 +9,13 @@ namespace DependencyInjection
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			var serviceProvider = new ServiceCollection()
+				.AddTransient<IStudentRepository, TestStudentRepository>()
+				.AddTransient<IStudentAdministration, StudentAdministration>()
+				.BuildServiceProvider();
 
-			var admin = new StudentAdministration(new TestStudentRepository());
+			var admin = serviceProvider.GetService<IStudentAdministration>();
+
 			admin.AddFiveStudents();
 			admin.PrintAllStudents();
 
